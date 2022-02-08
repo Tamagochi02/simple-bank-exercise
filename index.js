@@ -6,55 +6,42 @@ class BankAccount {
     }
 
     open() {
-        if (this.isOpen == true) {
-            throw new ValueError;
-        } else {
-            this.isOpen = true;
-        }
+        if (this.isOpen) 
+            throw new ValueError();
+        this.isOpen = true;
     }
 
     close() {
-        if (this.isOpen == false) {
+        if (!this.isOpen)
             throw new ValueError;
-        } else {
-            this.isOpen = false;
-            this.accountBalance = 0;
-        }
+        this.isOpen = false;
+        this.accountBalance = 0;
+        
     }
 
     deposit(money) {
-        if (money < 0) {
-            throw new ValueError;
-        } else {
-            if (this.isOpen == true) {
-                this.accountBalance = this.accountBalance + money;
-            } else {
-                this.accountBalance = 0;
-                throw new ValueError;
-            }
-        }
+        if (money < 0)
+            throw new ValueError();
+        if (!this.isOpen) 
+            throw new ValueError();        
+        this.accountBalance += money;
     }
 
     withdraw(money) {
-        if (money < 0 || money > this.accountBalance) {
+        if (money < 0 || money > this.accountBalance) 
             throw new ValueError;
-        } else if (this.isOpen == false) {
-            throw new ValueError;
-        } else {
-            if (this.isOpen == true) {
-                this.accountBalance = this.accountBalance - money;
-            } else {
-                this.accountBalance = this.accountBalance;
-            }
-        }
+        if (!this.isOpen)
+            throw new ValueError
+        if (this.isOpen)
+            this.accountBalance = this.accountBalance - money;
+        this.accountBalance = this.accountBalance;
+            
     }
 
     get balance() {
-        if (this.isOpen == false) {
-            throw new ValueError;
-        } else {
-            return this.accountBalance;
-        }
+        if (!this.isOpen) 
+            throw new ValueError();
+        return this.accountBalance;
     }
 }
 
